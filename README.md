@@ -2,24 +2,24 @@
 
 ## Overview
 
-Weatherful Bot is a Python-based automated system that tweets real-time weather updates specifically for Fullerton, California, every 2 hours. This repository contains all the code and documentation needed to set up your own instance of Weatherful Bot. It aims to provide a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
+Weatherful Bot is a Python-based automated system that tweets real-time weather updates specific to Fullerton, California, every hour. This repository contains all the code and documentation needed to set up your own instance of Weatherful Bot. It aims to provide a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
 
 <!-- ![Weatherful Bot Demo](demo.png) -->
 
 ## Features
 
 - **Location-Specific**: Provides weather updates specifically for Fullerton, California.
-- **Real-Time Weather Updates**: Tweets the current weather every 2 hours.
+- **Real-Time Weather Updates**: Tweets the current weather every hour.
 - **Automated Mentions**: Capability to reply to users asking for weather updates in Fullerton (Feature in development).
 - **Automated Hashtags**: Uses hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather` to categorize tweets.
 - **Retweet Weather Alerts**: Planned feature to retweet urgent weather warnings that pertain to Fullerton.
 
-## Prerequisites
+## Tech Stack
 
 - Python 3.x
 - Tweepy Library
-- OpenWeatherMap API Key
-- Twitter Developer Account
+- Weatherbit Forecast API 
+- Twitter Developer API Access
 
 ## Installation & Setup
 
@@ -34,7 +34,7 @@ Weatherful Bot is a Python-based automated system that tweets real-time weather 
     pip install -r requirements.txt
     ```
 
-3. Rename `.env.sample` to `.env` and fill in your OpenWeatherMap API key and Twitter API credentials for Fullerton weather tracking.
+3. Rename `.env.sample` to `.env` and fill in your Weatherbit API key and Twitter API credentials for Fullerton weather tracking.
 
 4. Run the bot:
     ```bash

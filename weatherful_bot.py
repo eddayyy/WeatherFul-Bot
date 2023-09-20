@@ -47,8 +47,9 @@ class WeatherfulBot:
                 return "Could not fetch weather data."
 
 if __name__ == "__main__":
-    weatherful = WeatherfulBot()
+    weatherful = WeatherfulBot()    
     weather_status = weatherful.fetch_weather()
+    weather_status = "Test"
     if weather_status:
         weatherful.create_tweet(weather_status)
         
