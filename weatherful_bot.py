@@ -5,46 +5,37 @@ import os
 from time import sleep
 from dotenv import load_dotenv
 
-load_dotenv()
-
-weather_api_key = os.getenv("OPENWEATHERMAP_API_KEY")
-weatherbit_api_key = os.getenv("WEATHERBIT_API_KEY")
-twitter_consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
-twitter_consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
-twitter_access_token = os.getenv("TWITTER_ACCESS_TOKEN")
-twitter_access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
-
-# Configure Tweepy
-auth = tweepy.OAuthHandler(twitter_consumer_key, twitter_consumer_secret)
-auth.set_access_token(twitter_access_token, twitter_access_token_secret)
-api = tweepy.API(auth)
-
-def fetch_weather():
-    # Latitude and Longitude for Fullerton, CA
-    lat = 33.8704
-    lon = -117.9244
-    
-    # Fetch weather data using latitude and longitude
-    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weather_api_key}'
-    response = requests.get(url)
-    data = response.json()
-    
-    if data['cod'] == 200:
-        main_data = data['main']
-        weather_data = data['weather'][0]
+class WeatherfulBot: 
+    def __init__(self): 
+        load_dotenv()
+        self.weather_api = os.getenv("WEATHERBIT_API_KEY")
         
-        temperature = main_data['temp'] - 273.15  # Convert from Kelvin to Celsius
-        description = weather_data['description']
+        c_key = os.getenv("TWITTER_CONSUMER_KEY")
+        c_secret = os.getenv("TWITTER_CONSUMER_SECRET")
         
-        return f'The current weather in Fullerton, CA is {temperature:.2f}°C with {description}.'
-    else:
-        return None
+        a_token = os.getenv("TWITTER_ACCESS_TOKEN")
+        a_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
+        
+        client_id = os.getenv("TWITTER_CLIENT_ID")
+        client_secret = os.getenv("TWITTER_CLIENT_SECRET")
+        self.bearer_token = os.getenv("TWITTER_BEARER_TOKEN")
+        
+        self.client = tweepy.Client(self.bearer_token, c_key, c_secret, a_token, a_secret)
+        auth = tweepy.OAuth1UserHandler(c_key, c_secret, a_token, a_secret)
+        self.api = tweepy.API(auth)
+        
+        
+    def create_tweet(self, text):
+        self.client.create_tweet(text=text)
 
-while True:
-    tweet = fetch_weather()
-    
-    if tweet:
-        api.update_status(tweet)
-        print(f'Tweeted: {tweet}')
+    def retweet(self, tweet_id):
+        self.client.retweet(tweet_id)
         
-    sleep(3600)  # Sleep for 1 hour (3600 seconds)
+
+if __name__ == "__main__":
+    weatherful = WeatherfulBot()
+    weatherful.create_tweet("Testing 1, 2, 3")
+
+
+
+
