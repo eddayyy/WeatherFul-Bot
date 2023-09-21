@@ -85,9 +85,10 @@ class WeatherfulBot:
             uv_index = weather_data['data'][0]['uv']
 
             # Create the tweet text
-            fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description} skies! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity           \n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
+            fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description} skies! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity            \n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
             return fetch_weather_text
         else:
+            print(response.status_code)
             # Return an error message if the API call fails
             return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
@@ -123,6 +124,7 @@ class WeatherfulBot:
                 tweet_text += new_line
             return tweet_text
         else:
+            print(response.status_code)
             # Return an error message if the API call fails
             return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
@@ -166,6 +168,7 @@ class WeatherfulBot:
             else:
                 return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
         else:
+            print(response.status_code)
             return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
     def print_calls(self, weatherful):
@@ -181,13 +184,13 @@ class WeatherfulBot:
         print(weatherful_text)
         print("--------------------------------------------")
 
-        weatherful_text = weatherful.fetch_weekly_forecast()
-        print(weatherful_text)
-        print("--------------------------------------------")
-        weatherful_text = weatherful.fetch_sun_times()
+        # weatherful_text = weatherful.fetch_weekly_forecast()
+        # print(weatherful_text)
+        # print("--------------------------------------------")
+        # weatherful_text = weatherful.fetch_sun_times()
 
-        print(weatherful_text)
-        print("--------------------------------------------")
+        # print(weatherful_text)
+        # print("--------------------------------------------")
 
     def schedule_tweets(self):
         ''' 
