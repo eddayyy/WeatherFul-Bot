@@ -23,7 +23,7 @@ class WeatherfulBot:
 
         # Load and set API keys
         load_dotenv()
-        self.weather_api = os.getenv("WEATHERBIT_API_KEY")
+        self.weather_api = os.getenv("WEATHERBIT_TRIAL_API_KEY")
         self.bearer_token = os.getenv("TWITTER_BEARER_TOKEN")
 
         # Load Twitter credentials
@@ -43,7 +43,7 @@ class WeatherfulBot:
         self.lon = "-117.9243"
         self.lat = "33.8704"
 
-        # Failure messages
+        # Failure text
         self.failure_text = "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
     def validate_tweet(self, tweet_text):
@@ -65,7 +65,12 @@ class WeatherfulBot:
         Parameters:
             - text: The text content of the tweet
         '''
-        self.client.create_tweet(text=text)
+        try:
+            # Attempt to create a tweet
+            self.client.create_tweet(text=text)
+        except tweepy.TweepError as e:
+            # e is an instance of TweepError
+            print(f"Error code: {e.api_code}, Error message: {e.reason}")
 
     def fetch_weather(self):
         '''
@@ -92,9 +97,7 @@ class WeatherfulBot:
             fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description} skies! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity\n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
             return fetch_weather_text
         else:
-            print(response.status_code)
-            # Return an error message if the API call fails
-            return self.failure_text
+            return f"Weather API Error Code: {response.status_code} {response.reason}"
 
     def fetch_weekly_forecast(self):
         '''
@@ -109,17 +112,22 @@ class WeatherfulBot:
         # Check if the API call was successful
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
-            tweet_text = "📅 Our 7-day forecast for Fullerton is looking like:"
+            tweet_text = "📅 Here's the 7-day weather outlook for Fullerton 🌞🌧️:"
 
             # Iterate over each day's data
             for day in forecast_data['data']:
-                date = day['valid_date'][5:]
+                # Extracting the day of the week and date
+                full_date = day['valid_date']
+                date_obj = datetime.strptime(full_date, "%Y-%m-%d")
+                day_of_week = date_obj.strftime("%A")
+                date = full_date[5:]
+
                 max_temp = int(day['high_temp'])
                 min_temp = int(day['low_temp'])
                 description = day['weather']['description']
 
-                # Abbreviate the text to fit within tweet length limits
-                new_line = f"\n{date}: {max_temp}/{min_temp}°F, {description}"
+                # Including the day of the week, date, and some emojis
+                new_line = f"\n🗓 {day_of_week} ({date}): 🌡 {max_temp}/{min_temp}°F, {description}"
 
                 # Check if the tweet text is too long
                 if len(tweet_text + new_line) > 280:
@@ -128,9 +136,10 @@ class WeatherfulBot:
                 tweet_text += new_line
             return tweet_text
         else:
-            # Return an error message if the API call fails
-            print(response.status_code)
-            return self.failure_text
+            # Return the error message and status code if the API call fails
+            error_message = f"Failed to fetch the weekly forecast. Error code: {response.status_code}"
+            print(error_message)
+            return error_message
 
     def fetch_sun_times(self):
         '''
@@ -170,7 +179,8 @@ class WeatherfulBot:
                 else:
                     return self.failure_text
             else:
-                return self.failure_text
+
+                return response.status_code
         else:
             print(response.status_code)
             return self.failure_text
@@ -237,4 +247,4 @@ if __name__ == "__main__":
     weatherful.print_calls(weatherful)
 
     # Scheduled function calls for tweets
-    weatherful.schedule_tweets()
+    # weatherful.schedule_tweets()
