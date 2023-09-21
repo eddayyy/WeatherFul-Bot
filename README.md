@@ -25,7 +25,7 @@ Weatherful Bot is a Python-based automated system that tweets real-time weather 
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/weatherful-bot.git
+    git clone https://github.com/eddayyy/weatherful-bot.git
     ```
 
 2. Navigate to the project directory and install the required packages:
