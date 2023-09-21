@@ -3,6 +3,9 @@ import requests
 import json
 import os
 import schedule
+import pytz 
+
+from datetime import datetime, timezone
 from time import sleep
 from dotenv import load_dotenv
 
@@ -63,9 +66,9 @@ class WeatherfulBot:
             tweet_text = "📅 7-day forecast for Fullerton:"
 
             for day in forecast_data['data']:
-                date = day['valid_date'][5:]  # Omit year (keep only month-day)
-                max_temp = int(day['high_temp'])  # Convert to integer
-                min_temp = int(day['low_temp'])  # Convert to integer
+                date = day['valid_date'][5:]  
+                max_temp = int(day['high_temp'])  
+                min_temp = int(day['low_temp'])  
                 description = day['weather']['description']
 
                 # Abbreviate to reduce text length
@@ -90,14 +93,25 @@ class WeatherfulBot:
 
         if response.status_code == 200:
             sun_data = json.loads(response.text)
-            sunrise = sun_data['data'][0]['sunrise']
-            sunset = sun_data['data'][0]['sunset']
-
-            tweet_text = f"🌄 Sunrise at {sunrise}\n🌅 Sunset at {sunset}"
-
-            return tweet_text
+            
+            if 'data' in sun_data and sun_data['data']:
+                first_day_data = sun_data['data'][0]
+                if 'sunrise_ts' in first_day_data and 'sunset_ts' in first_day_data:
+                    # Convert Unix timestamp to human-readable time
+                    tz = pytz.timezone('America/Los_Angeles')  # Use the appropriate time zone
+                    sunrise = datetime.fromtimestamp(first_day_data['sunrise_ts'], tz=timezone.utc).astimezone(tz).strftime('%I:%M %p').lstrip('0')
+                    sunset = datetime.fromtimestamp(first_day_data['sunset_ts'], tz=timezone.utc).astimezone(tz).strftime('%I:%M %p').lstrip('0')
+                    
+                    tweet_text = f"🌄 Sunrise at {sunrise}\n🌅 Sunset at {sunset}"
+                    print(tweet_text)
+                    return tweet_text
+                else:
+                    return "😢 Oops! Couldn't find sunrise or sunset data. Stay tuned for updates! 🌧️"
+            else:
+                return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
         else:
             return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
+
 
 
 if __name__ == "__main__":
@@ -114,9 +128,12 @@ if __name__ == "__main__":
     # else:
     #     print("Tweet is too long.")
 
+    weather_status = weatherful.fetch_weather
+    weather_status = weatherful.tweet_weekly_forecast()
     weather_status = weatherful.tweet_sun_times()
-    if weather_status:
-        weatherful.create_tweet(weather_status)
+
+    # if weather_status:
+    #     weatherful.create_tweet(weather_status)
 
     # Then continue with your scheduled tasks
     # schedule.every().hour.do(weatherful.fetch_weather)
