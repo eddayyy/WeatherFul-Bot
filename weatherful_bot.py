@@ -108,15 +108,15 @@ if __name__ == "__main__":
     # if weather_status:
     #     weatherful.create_tweet(weather_status)
 
-    weather_status = weatherful.tweet_weekly_forecast()
-    if weather_status and weatherful.validate_tweet(weather_status):
-        weatherful.create_tweet(weather_status)
-    else:
-        print("Tweet is too long.")
-
-    # weather_status = weatherful.tweet_sun_times()
-    # if weather_status:
+    # weather_status = weatherful.tweet_weekly_forecast()
+    # if weather_status and weatherful.validate_tweet(weather_status):
     #     weatherful.create_tweet(weather_status)
+    # else:
+    #     print("Tweet is too long.")
+
+    weather_status = weatherful.tweet_sun_times()
+    if weather_status:
+        weatherful.create_tweet(weather_status)
 
     # Then continue with your scheduled tasks
     # schedule.every().hour.do(weatherful.fetch_weather)
