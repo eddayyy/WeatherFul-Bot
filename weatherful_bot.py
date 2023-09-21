@@ -43,6 +43,9 @@ class WeatherfulBot:
         self.lon = "-117.9243"
         self.lat = "33.8704"
 
+        # Failure messages
+        self.failure_text = "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
+
     def validate_tweet(self, tweet_text):
         '''
         Validate a tweet's text length.
@@ -77,6 +80,7 @@ class WeatherfulBot:
 
         # Check if the API call was successful
         if response.status_code == 200:
+
             weather_data = json.loads(response.text)
             temp = weather_data['data'][0]['temp']
             description = weather_data['data'][0]['weather']['description']
@@ -85,12 +89,12 @@ class WeatherfulBot:
             uv_index = weather_data['data'][0]['uv']
 
             # Create the tweet text
-            fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description} skies! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity            \n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
+            fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description} skies! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity\n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
             return fetch_weather_text
         else:
             print(response.status_code)
             # Return an error message if the API call fails
-            return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
+            return self.failure_text
 
     def fetch_weekly_forecast(self):
         '''
@@ -124,9 +128,9 @@ class WeatherfulBot:
                 tweet_text += new_line
             return tweet_text
         else:
-            print(response.status_code)
             # Return an error message if the API call fails
-            return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
+            print(response.status_code)
+            return self.failure_text
 
     def fetch_sun_times(self):
         '''
@@ -164,12 +168,12 @@ class WeatherfulBot:
                     tweet_text = f"🌄 Sunrise at {sunrise}\n🌅 Sunset at {sunset}"
                     return tweet_text
                 else:
-                    return "😢 Oops! Couldn't find sunrise or sunset data. Stay tuned for updates! 🌧️"
+                    return self.failure_text
             else:
-                return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
+                return self.failure_text
         else:
             print(response.status_code)
-            return "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
+            return self.failure_text
 
     def print_calls(self, weatherful):
         '''
@@ -184,13 +188,13 @@ class WeatherfulBot:
         print(weatherful_text)
         print("--------------------------------------------")
 
-        # weatherful_text = weatherful.fetch_weekly_forecast()
-        # print(weatherful_text)
-        # print("--------------------------------------------")
-        # weatherful_text = weatherful.fetch_sun_times()
+        weatherful_text = weatherful.fetch_weekly_forecast()
+        print(weatherful_text)
+        print("--------------------------------------------")
+        weatherful_text = weatherful.fetch_sun_times()
 
-        # print(weatherful_text)
-        # print("--------------------------------------------")
+        print(weatherful_text)
+        print("--------------------------------------------")
 
     def schedule_tweets(self):
         ''' 
@@ -199,10 +203,26 @@ class WeatherfulBot:
             - Weekly Forecast
             - Sunset / Sunrise Times
         '''
-        schedule.every().hour.do(weatherful.fetch_weather)
-        schedule.every().sunday.at("12:00").do(weatherful.fetch_weekly_forecast)
-        schedule.every().day.at("06:00").do(weatherful.fetch_sun_times)
-        schedule.every().day.at("18:00").do(weatherful.fetch_sun_times)
+
+        def tweet_weather():
+            tweet_text = self.fetch_weather()
+            if self.validate_tweet(tweet_text):
+                self.create_tweet(tweet_text)
+
+        def tweet_weekly_forecast():
+            tweet_text = self.fetch_weekly_forecast()
+            if self.validate_tweet(tweet_text):
+                self.create_tweet(tweet_text)
+
+        def tweet_sun_times():
+            tweet_text = self.fetch_sun_times()
+            if self.validate_tweet(tweet_text):
+                self.create_tweet(tweet_text)
+
+        schedule.every().hour.do(tweet_weather)
+        schedule.every().sunday.at("12:00").do(tweet_weekly_forecast)
+        schedule.every().day.at("06:00").do(tweet_sun_times)
+        schedule.every().day.at("18:00").do(tweet_sun_times)
 
         while True:
             schedule.run_pending()
@@ -213,4 +233,8 @@ if __name__ == "__main__":
     # Instantiate the WeatherfulBot class
     weatherful = WeatherfulBot()
 
+    # Print all function calls without tweeting
     weatherful.print_calls(weatherful)
+
+    # Scheduled function calls for tweets
+    weatherful.schedule_tweets()
