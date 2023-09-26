@@ -68,9 +68,9 @@ class WeatherfulBot:
         try:
             # Attempt to create a tweet
             self.client.create_tweet(text=text)
-        except tweepy.TweepError as e:
+        except tweepy.TweepyException as e:
             # e is an instance of TweepError
-            print(f"Error code: {e.api_code}, Error message: {e.reason}")
+            print(f"Error code: {e.add_note}, Error message: ")
 
     def fetch_weather(self):
         '''
@@ -228,11 +228,13 @@ class WeatherfulBot:
             tweet_text = self.fetch_sun_times()
             if self.validate_tweet(tweet_text):
                 self.create_tweet(tweet_text)
-
-        schedule.every().hour.do(tweet_weather)
-        schedule.every().sunday.at("12:00").do(tweet_weekly_forecast)
-        schedule.every().day.at("06:00").do(tweet_sun_times)
-        schedule.every().day.at("18:00").do(tweet_sun_times)
+        # tweet_sun_times()
+        tweet_weekly_forecast()
+        # tweet_weather()
+        # schedule.every().hour.do(tweet_weather)
+        # schedule.every().sunday.at("12:00").do(tweet_weekly_forecast)
+        # schedule.every().day.at("06:00").do(tweet_sun_times)
+        # schedule.every().day.at("18:00").do(tweet_sun_times)
 
         while True:
             schedule.run_pending()
@@ -244,7 +246,7 @@ if __name__ == "__main__":
     weatherful = WeatherfulBot()
 
     # Print all function calls without tweeting
-    weatherful.print_calls(weatherful)
+    # weatherful.print_calls(weatherful)
 
     # Scheduled function calls for tweets
-    # weatherful.schedule_tweets()
+    weatherful.schedule_tweets()
