@@ -2,7 +2,6 @@ import tweepy
 import requests
 import json
 import os
-import schedule
 import pytz
 
 from datetime import datetime, timezone
@@ -94,7 +93,7 @@ class WeatherfulBot:
             uv_index = weather_data['data'][0]['uv']
 
             # Create the tweet text
-            fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description} skies! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity\n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
+            fetch_weather_text = f"Hey Fullerton, it's currently {temp}°F with {description}! \n🌬️The current Wind Speeds are: {wind_speed} mph \n💧 We are at {humidity}% humidity\n🌞 UV Index: {uv_index}\nStay comfy and safe! 😊"
             return fetch_weather_text
         else:
             return f"Weather API Error Code: {response.status_code} {response.reason}"
@@ -109,14 +108,11 @@ class WeatherfulBot:
         url = f"https://api.weatherbit.io/v2.0/forecast/daily?lat={self.lat}&lon={self.lon}&key={self.weather_api}&units=I&days=7"
         response = requests.get(url)
 
-        # Check if the API call was successful
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
-            tweet_text = "📅 Here's the 7-day weather outlook for Fullerton 🌞🌧️:"
+            tweet_text = "Here's the 7-day weather outlook for Fullerton 🌞🌧️:"
 
-            # Iterate over each day's data
             for day in forecast_data['data']:
-                # Extracting the day of the week and date
                 full_date = day['valid_date']
                 date_obj = datetime.strptime(full_date, "%Y-%m-%d")
                 day_of_week = date_obj.strftime("%A")
@@ -185,6 +181,21 @@ class WeatherfulBot:
             print(response.status_code)
             return self.failure_text
 
+    def tweet_weather(self):
+        tweet_text = self.fetch_weather()
+        if self.validate_tweet(tweet_text):
+            self.create_tweet(tweet_text)
+
+    def tweet_weekly_forecast(self):
+        tweet_text = self.fetch_weekly_forecast()
+        if self.validate_tweet(tweet_text):
+            self.create_tweet(tweet_text)
+
+    def tweet_sun_times(self):
+        tweet_text = self.fetch_sun_times()
+        if self.validate_tweet(tweet_text):
+            self.create_tweet(tweet_text)
+
     def print_calls(self, weatherful):
         '''
 
@@ -205,48 +216,3 @@ class WeatherfulBot:
 
         print(weatherful_text)
         print("--------------------------------------------")
-
-    def schedule_tweets(self):
-        ''' 
-        Scheduled tweets for the bot:
-            - Hourly Forecast
-            - Weekly Forecast
-            - Sunset / Sunrise Times
-        '''
-
-        def tweet_weather():
-            tweet_text = self.fetch_weather()
-            if self.validate_tweet(tweet_text):
-                self.create_tweet(tweet_text)
-
-        def tweet_weekly_forecast():
-            tweet_text = self.fetch_weekly_forecast()
-            if self.validate_tweet(tweet_text):
-                self.create_tweet(tweet_text)
-
-        def tweet_sun_times():
-            tweet_text = self.fetch_sun_times()
-            if self.validate_tweet(tweet_text):
-                self.create_tweet(tweet_text)
-        # tweet_sun_times()
-        tweet_weekly_forecast()
-        # tweet_weather()
-        # schedule.every().hour.do(tweet_weather)
-        # schedule.every().sunday.at("12:00").do(tweet_weekly_forecast)
-        # schedule.every().day.at("06:00").do(tweet_sun_times)
-        # schedule.every().day.at("18:00").do(tweet_sun_times)
-
-        while True:
-            schedule.run_pending()
-            sleep(1)
-
-
-if __name__ == "__main__":
-    # Instantiate the WeatherfulBot class
-    weatherful = WeatherfulBot()
-
-    # Print all function calls without tweeting
-    # weatherful.print_calls(weatherful)
-
-    # Scheduled function calls for tweets
-    weatherful.schedule_tweets()
