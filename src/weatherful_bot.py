@@ -68,8 +68,8 @@ class WeatherfulBot:
             # Attempt to create a tweet
             self.client.create_tweet(text=text)
         except tweepy.TweepyException as e:
-            # e is an instance of TweepError
-            print(f"Error code: {e.add_note}, Error message: ")
+            # If the tweet fails, print the error message
+            print(e)
 
     def fetch_weather(self):
         '''
