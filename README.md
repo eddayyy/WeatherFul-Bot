@@ -4,7 +4,6 @@
 
 Weatherful Bot is a Python-based automated system that tweets real-time weather updates specific to Fullerton, California, every hour. This repository contains all the code and documentation needed to set up your own instance of Weatherful Bot. It aims to provide a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
 
-<!-- ![Weatherful Bot Demo](demo.png) -->
 
 ## Features
 
