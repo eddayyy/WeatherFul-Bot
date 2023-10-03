@@ -33,16 +33,16 @@ Weatherful Bot is a Python-based automated system that tweets real-time weather 
     pip install -r requirements.txt
     ```
 
-3. Rename `.env.sample` to `.env` and fill in your Weatherbit API key and Twitter API credentials for Fullerton weather tracking.
+3. Create a `.env` file and fill in your Weatherbit API key and Twitter API credentials for your location's weather tracking.
 
 4. Run the bot:
     ```bash
-    python weatherful_bot.py
+    python main.py
     ```
 
 ## Usage
 
-To receive weather updates for Fullerton, simply follow Weatherful Bot on Twitter. Future features will include the ability to request Fullerton-specific weather updates via mentions.
+To receive weather updates for Fullerton, simply follow [WeatherfulBot on Twitter](https://twitter.com/WeatherfulBot) and turn on notifications. 
 
 ## Data Protection and Compliance
 
