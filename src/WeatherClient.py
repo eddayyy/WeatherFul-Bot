@@ -12,7 +12,7 @@ class WeatherClient:
 
         self.weather_comments = {
             "Clear sky": "it's the perfect day to go out! 🌞",
-            "Few clouds": "it's a tad cloudy, but nice! 🌤",
+            "Few clouds": "it's a bit cloudy at the moment! 🌤",
             "Scattered clouds": "the clouds are playing hide and seek! ☁️🌤",
             "Broken clouds": "there are clouds everywhere, but it's cool! ⛅",
             "Shower rain": "uh oh! We've got rain, bring out those umbrellas! ☔",
@@ -24,7 +24,7 @@ class WeatherClient:
         
         self.weekly_comments = { 
             "Clear sky": "it will be the perfect day to go out! 🌞",
-            "Few clouds": "it will be a tad cloudy, but nice! 🌤",
+            "Few clouds": "it will be a bit cloudy! 🌤",
             "Scattered clouds": "the clouds will be playing hide and seek! ☁️🌤",
             "Broken clouds": "there will be clouds everywhere, but it will be cool! ⛅",
             "Shower rain": "uh oh! We will have rain, bring out those umbrellas! ☔",
@@ -82,8 +82,8 @@ class WeatherClient:
                     sunset = datetime.fromtimestamp(first_day_data['sunset_ts'], tz=timezone.utc).astimezone(
                         tz).strftime('%I:%M %p').lstrip('0')
 
-                    tweet_text = f"Hello Fullerton!\nToday the sun will rise at {sunrise}🌄 and set at {sunset}🌅\n Have a great day!🌞"
-                    return tweet_text + '\n#Fullerton #FullertonWeather #CSUF #CSUFWeather #Sunrise #Sunset'
+                    tweet_text = f"Good Morning Fullerton!☀️\nThe sun will rise at {sunrise}🌅 and set at {sunset}🌇\n Have a great day!🌞"
+                    return tweet_text + '\n#CSUF #Fullerton  #FullertonWeather  #Sunrise #Sunset'
                 else:
                     return self.failure_text
             else:
@@ -113,14 +113,14 @@ class WeatherClient:
                 
                 if description not in grouped_days:
                     grouped_days[description] = []
-                grouped_days[description].append(f"{day_of_week} | {max_temp}/{min_temp}°F🌡️")
+                grouped_days[description].append(f"📆{day_of_week} | {max_temp}/{min_temp}°F🌡️")
                 
             # Append grouped days to the tweet_text
             for desc, days_list in grouped_days.items():
                 for day_info in days_list:
-                    tweet_text += f"\\n{day_info}"
+                    tweet_text += f"\n{day_info}"
                 comment = self.weekly_comments.get(desc, "Enjoy the day!")
-                tweet_text += f"\\nDescription: {comment}\\n"
+                tweet_text += f"\nDescription: {comment}\n"
             
             return tweet_text
         else:

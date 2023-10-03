@@ -22,12 +22,10 @@ class WeatherfulBot:
             if not all([bearer_token, c_key, c_secret, a_token, a_secret, weather_api]):
                 raise ValueError("Missing essential environment variable")
 
-            # Setting up the Twitter API
             self.twitter_client = TwitterClient(
                 bearer_token, c_key, c_secret, a_token, a_secret
             )
 
-            # Setting up the WeatherClient
             self.weather_client = WeatherClient(
                 city='Fullerton,California',
                 weather_api=weather_api
