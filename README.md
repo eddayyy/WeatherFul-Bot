@@ -2,44 +2,39 @@
 
 ## Overview
 
-Weatherful Bot is a Python-based automated system that tweets real-time weather updates specific to Fullerton, California, every hour. This repository contains all the code and documentation needed to set up your own instance of Weatherful Bot. It aims to provide a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
-
+Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California, every hour. This repository hosts the code and documentation of Weatherful Bot, providing a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
 
 ## Features
 
-- **Location-Specific**: Provides weather updates specifically for Fullerton, California.
-- **Real-Time Weather Updates**: Tweets the current weather every hour.
-- **Automated Mentions**: Capability to reply to users asking for weather updates in Fullerton (Feature in development).
-- **Automated Hashtags**: Uses hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather` to categorize tweets.
-- **Retweet Weather Alerts**: Planned feature to retweet urgent weather warnings that pertain to Fullerton.
+- **Location-Specific**: Tailored weather updates for Fullerton, California.
+- **Real-Time Weather Updates**: 
+    - Tweets the current weather every hour.
+    - Tweets the sunrise and sunset every morning at 6 AM PST.
+    - Tweets a 7-Day forecast every Sunday at 12 PM PST.
+- **Automated Hashtags**: Utilizes hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather` to categorize tweets.
 
 ## Tech Stack
 
-- Python 3.x
-- AWS Lambda - Serverless Computing
-- Tweepy Library
+- Python 3.11
+- AWS Lambda
+- Amazon S3 
 - Weatherbit Forecast API 
 - Twitter Developer API Access
 
-## Installation & Setup
+## Deployment
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/eddayyy/weatherful-bot.git
-    ```
+Weatherful Bot is deployed on AWS Lambda, which allows it to run code in response to events without provisioning or managing servers. This serverless architecture is cost-effective and scales automatically by adjusting its capacity in response to incoming traffic.
 
-2. Navigate to the project directory and install the required packages:
-    ```bash
-    cd weatherful-bot
-    pip install -r requirements.txt
-    ```
+### AWS Lambda Configuration
 
-3. Create a `.env` file and fill in your Weatherbit API key and Twitter API credentials for your location's weather tracking.
+1. **Deployment Package**: 
+   - Prepare a deployment package containing the code along with any dependencies.
+   - Compress the deployment package into a zip file.
+   - Upload the zipped deployment package to Amazon S3 (Amazon Simple Storage Service).
+   - Once uploaded, link the deployment package to the AWS Lambda Function to complete the deployment process.
+2. **Environment Variables**: Necessary environment variables like API keys and other configurations are set within the Lambda function settings.
+3. **Event Sources**: Scheduled events are set up using Amazon EventBridge to trigger the Lambda function every hour, every morning at 6 AM PST, and every Sunday at 12 PM PST.
 
-4. Run the bot:
-    ```bash
-    python main.py
-    ```
 
 ## Usage
 
@@ -47,11 +42,7 @@ To receive weather updates for Fullerton, simply follow [WeatherfulBot on Twitte
 
 ## Data Protection and Compliance
 
-Weatherful Bot does not collect, store, or analyze personal data from Twitter users. It complies with Twitter's Developer Agreement and Policy, as well as all relevant data protection laws.
-
-## Contributing
-
-Feel free to fork this repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
+Weatherful Bot adheres to a strict data protection policy, ensuring it does not collect, store, or analyze personal data from Twitter users. Compliance with Twitter's Developer Agreement and Policy, as well as all relevant data protection laws, is a priority.
 
 ## License
 
