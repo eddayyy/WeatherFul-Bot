@@ -1,8 +1,15 @@
 from WeatherfulBot import WeatherfulBot
 
 
-if __name__ == '__main__':
-    weatherful = WeatherfulBot()
-    weatherful.tweet('weekly')
-    weatherful.tweet('hourly')
-    weatherful.tweet('sun')
+class MainProgram:
+    def __init__(self):
+        self.weatherful = WeatherfulBot()
+
+    def run(self, type):
+        if type == 'hourly':
+            self.weatherful.tweet('hourly')
+        elif type == 'weekly':
+            self.weatherful.tweet('weekly')
+        elif type == 'sun':
+            self.weatherful.tweet('sun')
+        return

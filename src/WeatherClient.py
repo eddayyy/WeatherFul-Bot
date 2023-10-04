@@ -21,8 +21,8 @@ class WeatherClient:
             "Snow": "is that snow? We have a snow day! ☃️❄️",
             "Mist": "it's a little misty out! Stay safe. 🌫"
         }
-        
-        self.weekly_comments = { 
+
+        self.weekly_comments = {
             "Clear sky": "it will be the perfect day to go out! 🌞",
             "Few clouds": "it will be a bit cloudy! 🌤",
             "Scattered clouds": "the clouds will be playing hide and seek! ☁️🌤",
@@ -32,7 +32,7 @@ class WeatherClient:
             "Thunderstorm": "we will have a thunderstorm! Stay safe indoors! ⛈",
             "Snow": "is that snow? We will have a snow day! ☃️❄️",
             "Mist": "it will be a little misty out! Stay safe. 🌫"
-            }
+        }
         self.failure_text = "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
         logging.basicConfig(level=logging.INFO)
@@ -100,7 +100,7 @@ class WeatherClient:
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
             tweet_text = "🛰️☁️ 7-day forecast for Fullerton:"
-            
+
             # Dictionary to group days by their description
             grouped_days = {}
             for day in forecast_data['data']:
@@ -110,21 +110,21 @@ class WeatherClient:
                 max_temp = int(day['high_temp'])
                 min_temp = int(day['low_temp'])
                 description = day['weather']['description']
-                
+
                 if description not in grouped_days:
                     grouped_days[description] = []
-                grouped_days[description].append(f"📆{day_of_week} | {max_temp}/{min_temp}°F🌡️")
-                
+                grouped_days[description].append(
+                    f"📆{day_of_week} | {max_temp}/{min_temp}°F🌡️")
+
             # Append grouped days to the tweet_text
             for desc, days_list in grouped_days.items():
                 for day_info in days_list:
                     tweet_text += f"\n{day_info}"
                 comment = self.weekly_comments.get(desc, "Enjoy the day!")
                 tweet_text += f"\nDescription: {comment}\n"
-            
+
             return tweet_text
         else:
             error_message = f"Failed to fetch forecast. Error: {response.status_code}"
             print(error_message)
             return error_message
-
