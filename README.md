@@ -16,6 +16,7 @@ Weatherful Bot is a Python-based automated system that tweets real-time weather 
 ## Tech Stack
 
 - Python 3.x
+- AWS Lambda - Serverless Computing
 - Tweepy Library
 - Weatherbit Forecast API 
 - Twitter Developer API Access
