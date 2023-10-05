@@ -20,8 +20,24 @@ class TwitterClient:
         logging.warning("Tweet validation failed: Tweet is too long")
         return False
 
-    def create_tweet(self, text):
+    def create_tweet(self, text, type):
         try:
-            self.client.create_tweet(text=text)
+            tweet = self.client.create_tweet(text=text)
+            if type == 'weekly':
+                self.pin_tweet(tweet)
         except tweepy.TweepyException as e:
             print(e)
+
+    def pin_tweet(self, tweet_id):
+        try:
+            user_timeline = self.api.user_timeline(count=1)
+            if user_timeline:
+                # Unpin the current pinned tweet if there's any
+                current_pinned_tweet = user_timeline[0]
+                if current_pinned_tweet.pinned:
+                    current_pinned_tweet.unpin()
+            # Pin the new tweet
+            tweet = self.api.get_status(tweet_id)
+            # tweet.pin() Work in progress
+        except tweepy.TweepyException as e:
+            logging.error(f"Failed to pin tweet: {e}")

@@ -30,7 +30,6 @@ class WeatherfulBot:
                 city='Fullerton,California',
                 weather_api=weather_api
             )
-            self.twitter_client.delete_all_tweets()
         except ValueError as e:
             logging.error(f"Configuration Error: {e}")
             raise
@@ -47,4 +46,4 @@ class WeatherfulBot:
             tweet_text = self.weather_client.fetch_weekly_forecast()
 
         if self.validate_tweet(tweet_text):
-            self.twitter_client.create_tweet(tweet_text)
+            self.twitter_client.create_tweet(tweet_text, type)
