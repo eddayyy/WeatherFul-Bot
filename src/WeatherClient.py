@@ -23,15 +23,15 @@ class WeatherClient:
         }
 
         self.weekly_comments = {
-            "Clear sky": "it will be the perfect day to go out! 🌞",
-            "Few clouds": "it will be a bit cloudy! 🌤",
-            "Scattered clouds": "the clouds will be playing hide and seek! ☁️🌤",
-            "Broken clouds": "there will be clouds everywhere, but it will be cool! ⛅",
-            "Shower rain": "uh oh! We will have rain, bring out those umbrellas! ☔",
-            "Rain": "it will be pouring rain! Stay cozy indoors. ☔🌧",
-            "Thunderstorm": "we will have a thunderstorm! Stay safe indoors! ⛈",
-            "Snow": "is that snow? We will have a snow day! ☃️❄️",
-            "Mist": "it will be a little misty out! Stay safe. 🌫"
+            "Clear sky": "\n🌞 Nothing but clear skies on:",
+            "Few clouds": "\n🌤 It will be a bit cloudy on:",
+            "Scattered clouds": "\n☁️🌤 There will be scattered clouds on:",
+            "Broken clouds": "\n⛅ There will be clouds everywhere, but it'll be fresh on:",
+            "Shower rain": "\n☔🌧 Bring out those umbrellas! It will be raining on:",
+            "Rain": "\n☔🌧 Bring out those umbrellas! It will be raining on:",
+            "Thunderstorm": "\n⛈ Theres a thunderstorm on the way! Stay safe indoors on:",
+            "Snow": "\n☃️❄️ Snow is on the way! Be prepared for it to snow on:",
+            "Mist": "\n🌫 It will be a little misty out! Stay safe on:"
         }
         self.failure_text = "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
@@ -61,7 +61,7 @@ class WeatherClient:
         comment = self.weather_comments.get(description, "Enjoy the day!")
 
         return f"Hey Fullerton, {comment}\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
-            \n💧 We are at {humidity}% humidity\n🌞ay comfy and safe! 😊\
+            \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
             \n#Fullerton #CSUF #FullertonWeather"
 
     def fetch_sun_times(self):
@@ -99,8 +99,8 @@ class WeatherClient:
 
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
-            tweet_text = "🛰️☁️ 7-day forecast for Fullerton:"
-
+            tweet_text = "🛰️☁️ 7-day forecast for Fullerton:\n"
+            print(forecast_data)
             # Dictionary to group days by their description
             grouped_days = {}
             for day in forecast_data['data']:
@@ -118,12 +118,11 @@ class WeatherClient:
 
             # Append grouped days to the tweet_text
             for desc, days_list in grouped_days.items():
+                comment = self.weekly_comments.get(desc, "Enjoy the day!")
+                tweet_text += f"\n{comment}"
                 for day_info in days_list:
                     tweet_text += f"\n{day_info}"
-                comment = self.weekly_comments.get(desc, "Enjoy the day!")
-                tweet_text += f"\nDescription: {comment}\n"
-
-            return tweet_text
+            return tweet_text.strip()
         else:
             error_message = f"Failed to fetch forecast. Error: {response.status_code}"
             print(error_message)
