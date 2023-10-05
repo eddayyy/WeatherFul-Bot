@@ -100,7 +100,6 @@ class WeatherClient:
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
             tweet_text = "🛰️☁️ 7-day forecast for Fullerton:\n"
-            print(forecast_data)
             # Dictionary to group days by their description
             grouped_days = {}
             for day in forecast_data['data']:
