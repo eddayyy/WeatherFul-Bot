@@ -1,5 +1,4 @@
 from WeatherfulBot import WeatherfulBot
-from TwitterClient import TwitterClient
 
 
 class MainProgram:
@@ -14,7 +13,3 @@ class MainProgram:
         elif type == 'sun':
             self.weatherful.tweet('sun')
         return
-
-
-if __name__ == "__main__":
-    program = WeatherfulBot()

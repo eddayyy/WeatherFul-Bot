@@ -25,13 +25,3 @@ class TwitterClient:
             self.client.create_tweet(text=text)
         except tweepy.TweepyException as e:
             print(e)
-
-    def delete_all_tweets(self):
-        # Get all tweets
-        # Max count per request is 200
-        tweets = self.api.user_timeline(count=200)
-
-        # Loop through and delete each tweet
-        for tweet in tweets:
-            print(f"Deleting tweet {tweet.id}")
-            self.api.destroy_status(tweet.id)
