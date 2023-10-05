@@ -13,8 +13,3 @@ class MainProgram:
         elif type == 'sun':
             self.weatherful.tweet('sun')
         return
-
-
-if __name__ == '__main__':
-    main = MainProgram()
-    main.run('weekly')
