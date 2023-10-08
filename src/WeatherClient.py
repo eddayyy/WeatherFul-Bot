@@ -23,16 +23,13 @@ class WeatherClient:
         }
 
         self.weekly_comments = {
-            "Clear sky": "\n🌞 Nothing but clear skies on:",
-            "Few clouds": "\n🌤 It will be a bit cloudy on:",
-            "Scattered clouds": "\n☁️🌤 There will be scattered clouds on:",
-            "Broken clouds": "\n⛅ There will be clouds everywhere, but it'll be fresh on:",
-            "Shower rain": "\n☔🌧 Bring out those umbrellas! It will be raining on:",
+            "Clear Sky": "\n🌞 Nothing but clear skies on:",
+            "Cloudy": "\n⛅ There will be clouds everywhere, but it'll be fresh on:",
             "Rain": "\n☔🌧 Bring out those umbrellas! It will be raining on:",
             "Thunderstorm": "\n⛈ Theres a thunderstorm on the way! Stay safe indoors on:",
             "Snow": "\n☃️❄️ Snow is on the way! Be prepared for it to snow on:",
-            "Mist": "\n🌫 It will be a little misty out! Stay safe on:"
         }
+
         self.failure_text = "😢 Oops! Couldn't fetch the weather data. Stay tuned for updates! 🌧️"
 
         logging.basicConfig(level=logging.INFO)
@@ -94,30 +91,38 @@ class WeatherClient:
             return self.failure_text
 
     def fetch_weekly_forecast(self):
-        url = f"https://api.weatherbit.io/v2.0/forecast/daily?&city={self.city}&key={self.weather_api}&units=I&days=7"
+        url = f"https://api.weatherbit.io/v2.0/forecast/daily?&city={self.city}&key={self.weather_api}&units=I&days=8"
         response = requests.get(url)
 
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
+            # print(forecast_data)
             tweet_text = "🛰️☁️ 7-day forecast for Fullerton:\n"
             # Dictionary to group days by their description
             grouped_days = {}
-            for day in forecast_data['data']:
+            for day in forecast_data['data'][1::]:
+
                 full_date = day['valid_date']
                 date_obj = datetime.strptime(full_date, "%Y-%m-%d")
                 day_of_week = date_obj.strftime("%a")
                 max_temp = int(day['high_temp'])
                 min_temp = int(day['low_temp'])
                 description = day['weather']['description']
-
+                print(description)
+                if description in ('Shower rain', 'Rain', 'Mist'):
+                    description = 'Rain'
+                elif description in ('Few clouds', 'Scattered clouds', 'Broken clouds'):
+                    description = 'Cloudy'
                 if description not in grouped_days:
                     grouped_days[description] = []
+
                 grouped_days[description].append(
                     f"📆{day_of_week} | {max_temp}/{min_temp}°F🌡️")
 
             # Append grouped days to the tweet_text
+            print(grouped_days.items())
             for desc, days_list in grouped_days.items():
-                comment = self.weekly_comments.get(desc, "Enjoy the day!")
+                comment = self.weekly_comments.get(desc, '')
                 tweet_text += f"\n{comment}"
                 for day_info in days_list:
                     tweet_text += f"\n{day_info}"
