@@ -30,12 +30,12 @@ class WeatherfulBot:
                 city='Fullerton,California',
                 weather_api=weather_api
             )
-            self.twitter_client.delete_all_tweets()
         except ValueError as e:
             logging.error(f"Configuration Error: {e}")
             raise
 
     def validate_tweet(self, tweet_text):
+
         return len(tweet_text) <= 280
 
     def tweet(self, type):
