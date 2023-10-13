@@ -2,13 +2,13 @@
 
 ## Overview
 
-Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California, every hour. This repository hosts the code and documentation of Weatherful Bot, providing a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
+Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California,  bi-hourly. This repository hosts the code and documentation of Weatherful Bot, providing a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
 
 ## Features
 
 - **Location-Specific**: Tailored weather updates for Fullerton, California.
 - **Real-Time Weather Updates**: 
-    - Tweets the current weather every hour.
+    - Tweets the current weather bi-hourly.
     - Tweets the sunrise and sunset every morning at 6 AM PST.
     - Tweets a 7-Day forecast every Sunday at 12 PM PST.
 - **Automated Hashtags**: Utilizes hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather` to categorize tweets.
@@ -33,7 +33,7 @@ Weatherful Bot is deployed on AWS Lambda, which allows it to run code in respons
    - Upload the zipped deployment package to Amazon S3 (Amazon Simple Storage Service).
    - Once uploaded, link the deployment package to the AWS Lambda Function to complete the deployment process.
 2. **Environment Variables**: Necessary environment variables like API keys and other configurations are set within the Lambda function settings.
-3. **Event Sources**: Scheduled events are set up using Amazon EventBridge to trigger the Lambda function every hour, every morning at 6 AM PST, and every Sunday at 12 PM PST.
+3. **Event Sources**: Scheduled events are set up using Amazon EventBridge to trigger the Lambda function every other hour, every morning at 6 AM PST, and every Sunday at 12 PM PST.
 
 
 ## Usage
