@@ -17,7 +17,7 @@ class WeatherfulBot:
             c_secret = os.getenv("TWITTER_API_KEY_SECRET")
             a_token = os.getenv("TWITTER_ACCESS_TOKEN")
             a_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
-            weather_api = os.getenv("WEATHERBIT_TRIAL_API_KEY")
+            weather_api = os.getenv("WEATHERBIT_API_KEY")
 
             if not all([bearer_token, c_key, c_secret, a_token, a_secret, weather_api]):
                 raise ValueError("Missing essential environment variable")
