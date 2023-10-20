@@ -1,8 +1,4 @@
-<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-
-<h1 style="justify-conten: center; font-size: 55px; paddng-top: 15px; padding-bottom: 15px;">Weatherful Bot <iconify-icon icon="openmoji:twitter"></iconify-icon> <iconify-icon icon="meteocons:clear-day-fill"></iconify-icon></h1> 
-
-
+# Weatherful Bot 🐦☀️
 
 ## Overview
 
