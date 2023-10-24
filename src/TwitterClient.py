@@ -13,13 +13,6 @@ class TwitterClient:
         self.api = tweepy.API(self.auth)
         logging.basicConfig(level=logging.INFO)
 
-    def validate_tweet(self, tweet_text):
-        # Here you can add more sophisticated validation
-        if len(tweet_text) <= 280:
-            return True
-        logging.warning("Tweet validation failed: Tweet is too long")
-        return False
-
     def create_tweet(self, text):
         try:
             self.client.create_tweet(text=text)
