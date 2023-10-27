@@ -17,29 +17,43 @@
 
 ## Table of Contents
 1. [Overview](#-overview)
-2. [Features](#-features)
+2. [Features and Demo](#features-and-demo)
 3. [Setting up the Development Environment](#-setting-up-the-development-environment)
-4. [Features and Demo](#features-and-demo)
-5. [License](#-license)
+4. [License](#-license)
 
 ## 🌟 Overview
 
 Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California, bi-hourly. 
 
-## 🚀 Features
+## **Features and Demo**
 
+### Feature 1: Twitter Profile
+- **Description**: Provide users with clean profile landing page, give a clear description of the bots purpose along with the bots tweet schedule. 
 
-1. **Location-Specific**: 
-    - Tailored weather updates exclusively for Fullerton, California.
+    - **Screenshot**: 
 
-2. **Real-Time Weather Updates**:
-    - **Bi-Hourly Reports**: Stay updated with current weather conditions, tweeted every two hours.
-    - **Sunrise & Sunset**: Get notified about the sunrise and sunset every morning at 6 AM PST.
-    - **7-Day Forecast**: Gain insights into the week ahead with a comprehensive 7-Day forecast every Sunday at 12 PM PST.
+        ![Feature 1 Screenshot](./data/media/Profile%20Demo.png)
 
-3. **Automated Hashtags**: 
-    - Enhance tweet discoverability with categorizing hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather`.
+### Feature 2: Bi-Hourly Tweet Tweet
+- **Description**: Tweet the weather every other hour in the following format, keeping the tweets clear and concise. Along with a few emojis to make the tweet a little nicer to look at. 
 
+    - **Screenshot**: 
+
+        ![Feature 2 Screenshot](./data/media/Bi-Hourly-Tweet%20Demo.png)
+
+### Feature 3: Sunset / Sunrise Tweet 
+- **Description**: Everyday at 6am the bot will tweet the sunrise and sunset times for that specific day. The tweet is well structured for easy readability and concise for clarity. 
+
+    - **Screenshot**: 
+
+        ![Feature 3 Screenshot](./data/media/Sunrise%20Sunset%20Demo.png)
+
+### Feature 4: Weekly Forecast Tweet
+- **Description**: Every Sunday at 12 PM PST the bot will tweet the 7-day forecast for the upcoming days. The tweet is formatted so that it distinguishes the type of weather that will occurr on specific days (cloudy, rainy, sunny, etc.).
+
+    - **Screenshot**: 
+
+        ![Feature 4 Screenshot](./data/media/Weekly%20Forecast%20Demo.png)
 ## 🛠️ Setting up the Development Environment
 
 Follow these steps to set up and deploy the Weatherful Bot:
@@ -72,36 +86,6 @@ Follow these steps to set up and deploy the Weatherful Bot:
      - Set up scheduled events using Amazon EventBridge. This will trigger the Lambda function at the times you have scheduled
 
 Remember to always maintain the security of your API keys and any other sensitive data during the entire setup and deployment process.
-
-## **Features and Demo**
-
-### Feature 1: Twitter Profile
-- **Description**: Provide users with clean profile landing page, give a clear description of the bots purpose along with the bots tweet schedule. 
-
-    - **Screenshot**: 
-
-        ![Feature 1 Screenshot](./data/media/Profile%20Demo.png)
-
-### Feature 2: Bi-Hourly Tweet Tweet
-- **Description**: Tweet the weather every other hour in the following format, keeping the tweets clear and concise. Along with a few emojis to make the tweet a little nicer to look at. 
-
-    - **Screenshot**: 
-
-        ![Feature 2 Screenshot](./data/media/Bi-Hourly-Tweet%20Demo.png)
-
-### Feature 3: Sunset / Sunrise Tweet 
-- **Description**: Everyday at 6am the bot will tweet the sunrise and sunset times for that specific day. The tweet is well structured for easy readability and concise for clarity. 
-
-    - **Screenshot**: 
-
-        ![Feature 3 Screenshot](./data/media/Sunrise%20Sunset%20Demo.png)
-
-### Feature 4: Weekly Forecast Tweet
-- **Description**: Every Sunday at 12 PM PST the bot will tweet the 7-day forecast for the upcoming days. The tweet is formatted so that it distinguishes the type of weather that will occurr on specific days (cloudy, rainy, sunny, etc.).
-
-    - **Screenshot**: 
-
-        ![Feature 4 Screenshot](./data/media/Weekly%20Forecast%20Demo.png)
 
 ## 📄 License
 
