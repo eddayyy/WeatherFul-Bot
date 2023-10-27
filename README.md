@@ -1,6 +1,9 @@
 <div align="center">
     <img width=35% src="./data/media/Profile Picture.png">
     <h1>Weatherful Bot ☀️</h1>
+    <a href="https://twitter.com/WeatherfulBot">
+        <img alt="Status" src="https://img.shields.io/badge/Status-Live-brightgreen">
+    </a>
     <img alt="Python Version" src="https://img.shields.io/badge/Python-v3.10%2B-blue">
     <img alt="AWS Lambda" src="https://img.shields.io/badge/AWS-Lambda-f4800b">
     <img alt="AWS S3" src="https://img.shields.io/badge/AWS-S3-43985a">
@@ -10,68 +13,82 @@
     </a>
 </div>
 
+
+
 ## Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [Setup and Deployment](#️-setup-and-deployment-or-development-environment)
-- [License](#-license)
-- [Features and Demo](#features-and-demo-link-to-any-demo-or-visual-guide)
+1. [Overview](#overview)
+2. [Features](#🚀-features)
+3. [Setting up the Development Environment](#🔧-setting-up-the-development-environment)
+5. [Demo](#demo)
+4. [License](#📄-license)
 
 ## Overview
 
-Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California,  bi-hourly. This repository hosts the code and documentation of Weatherful Bot, providing a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
+Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California, bi-hourly. 
 
 ## 🚀 Features
 
-- **Manage Student Grades**: 
-    - **Modify Student Grades**: Swiftly adjust and update student grades.
-    - **Sort Grades**: Organize student grades for quick insights.
-    - **Search for Students**: Efficient student searches using Student ID (SID).
 
-- **Statistical Analysis**: 
-    - Generate insights on class performance for specific assignments, such as mean, median, standard deviation, missing assignments, and scores' range.
+#### Location-Specific 
+- Tailored weather updates exclusively for Fullerton, California.
 
-- **Data Import/Export**: 
-    - **Import Students**: Import student data seamlessly from CSV files.
-    - **Export Modified Data**: Export updated student data conveniently to a CSV file.
+#### Real-Time Weather Updates
+- **Bi-Hourly Reports**: Stay updated with current weather conditions, tweeted every two hours.
+- **Sunrise & Sunset**: Get notified about the sunrise and sunset every morning at 6 AM PST.
+- **7-Day Forecast**: Gain insights into the week ahead with a comprehensive 7-Day forecast every Sunday at 12 PM PST.
 
-- **User-Friendly Interface**: 
-    - Designed for ease of use, ensuring educators can navigate and operate the application efficiently.
+#### Automated Hashtags 
+- Enhance tweet discoverability with categorizing hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather`.
 
-- **Extended Features**: (or "Visual Demos", or another appropriate title)
-    - For a visual representation of features and demos, check [this link](https://github.com/eddayyy/RA-Assessment/tree/main).
+## 🔧 Setting up the Development Environment
 
-## Tech Stack
+Follow these steps to set up and deploy the Weatherful Bot:
 
-- Python 3.11
-- AWS Lambda
-- Amazon S3 
-- Weatherbit Forecast API 
-- Twitter Developer API Access
+1. **Clone the Repository**: 
+   - Use the command `git clone https://github.com/eddayyy/WeatherFul-Bot` to get the codebase onto your local machine.
 
-## 🛠️ Setting up the Development Environment
+2. **Install Requirements**:
+   - Navigate to the project directory and run `pip install -r requirements.txt` to install necessary dependencies.
 
-Weatherful Bot is deployed on AWS Lambda, which allows it to run code in response to events without provisioning or managing servers. This serverless architecture is cost-effective and scales automatically by adjusting its capacity in response to incoming traffic.
+3. **API Configuration**:
+   - Obtain API keys for both Twitter and Weatherbit.
+   - Save these keys securely, as they'll be necessary for authenticating and making API requests.
 
-### AWS Lambda Configuration
+4. **Function Modifications**:
+   - Modify functions or scripts within the codebase as needed to fit your specific requirements or adjustments.
 
-1. **Deployment Package**: 
-   - Prepare a deployment package containing the code along with any dependencies.
-   - Compress the deployment package into a zip file.
-   - Upload the zipped deployment package to Amazon S3 (Amazon Simple Storage Service).
-   - Once uploaded, link the deployment package to the AWS Lambda Function to complete the deployment process.
-2. **Environment Variables**: Necessary environment variables like API keys and other configurations are set within the Lambda function settings.
-3. **Event Sources**: Scheduled events are set up using Amazon EventBridge to trigger the Lambda function every other hour, every morning at 6 AM PST, and every Sunday at 12 PM PST.
+5. **AWS Deployment**:
+
+   - **Deployment Package**:
+     - Prepare a deployment package containing the code along with any dependencies.
+     - Compress the deployment package into a zip file.
+     - Upload the zipped deployment package to Amazon S3 (Amazon Simple Storage Service).
+     - Once uploaded, link the deployment package to the AWS Lambda Function to complete the deployment process.
+
+   - **Environment Variables**:
+     - Set necessary environment variables, like the API keys and other configurations, within the Lambda function settings.
+
+   - **Event Sources**:
+     - Set up scheduled events using Amazon EventBridge. This will trigger the Lambda function at the times you have scheduled
+
+Remember to always maintain the security of your API keys and any other sensitive data during the entire setup and deployment process.
+
+## Demo 
+
+#### Twitter Profile: 
+
+<img alt="Twitter Profile" width=50% height=100% src="./data/media/Profile Demo.png">
+
+#### Bi-Hourly Tweet Tweet: 
+<img alt="Bi-Hourly Tweet" width=50% height=100% src="./data/media/Bi-Hourly-Tweet Demo.png">
+
+#### Sunset / Sunrise Tweet: 
+<img alt="Sunset / Sunrise Tweet" width=50% height=100% src="./data/media/Sunrise Sunset Demo.png">
+
+#### Weekly Forecast Tweet: 
+<img alt="Weekly Forecast Tweet" width=50% height=100% src="./data/media/Weekly Forecast Demo.png"
 
 
-## Usage
+## 📄 License
 
-To receive weather updates for Fullerton, simply follow [WeatherfulBot on Twitter](https://twitter.com/WeatherfulBot) and turn on notifications. 
-
-## Data Protection and Compliance
-
-Weatherful Bot adheres to a strict data protection policy, ensuring it does not collect, store, or analyze personal data from Twitter users. Compliance with Twitter's Developer Agreement and Policy, as well as all relevant data protection laws, is a priority.
-
-## License
-
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) for details.
