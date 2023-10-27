@@ -16,31 +16,31 @@
 
 
 ## Table of Contents
-1. [Overview](#overview)
+1. [Overview](#-overview)
 2. [Features](#-features)
 3. [Setting up the Development Environment](#-setting-up-the-development-environment)
-5. [Demo and Pictures](#demo-and-pictures)
-4. [License](#-license)
+4. [Features and Demo](#features-and-demo)
+5. [License](#-license)
 
-## Overview
+## 🌟 Overview
 
 Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California, bi-hourly. 
 
 ## 🚀 Features
 
 
-#### Location-Specific 
-- Tailored weather updates exclusively for Fullerton, California.
+1. **Location-Specific**: 
+    - Tailored weather updates exclusively for Fullerton, California.
 
-#### Real-Time Weather Updates
-- **Bi-Hourly Reports**: Stay updated with current weather conditions, tweeted every two hours.
-- **Sunrise & Sunset**: Get notified about the sunrise and sunset every morning at 6 AM PST.
-- **7-Day Forecast**: Gain insights into the week ahead with a comprehensive 7-Day forecast every Sunday at 12 PM PST.
+2. **Real-Time Weather Updates**:
+    - **Bi-Hourly Reports**: Stay updated with current weather conditions, tweeted every two hours.
+    - **Sunrise & Sunset**: Get notified about the sunrise and sunset every morning at 6 AM PST.
+    - **7-Day Forecast**: Gain insights into the week ahead with a comprehensive 7-Day forecast every Sunday at 12 PM PST.
 
-#### Automated Hashtags 
-- Enhance tweet discoverability with categorizing hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather`.
+3. **Automated Hashtags**: 
+    - Enhance tweet discoverability with categorizing hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather`.
 
-## 🔧 Setting up the Development Environment
+## 🛠️ Setting up the Development Environment
 
 Follow these steps to set up and deploy the Weatherful Bot:
 
@@ -73,21 +73,35 @@ Follow these steps to set up and deploy the Weatherful Bot:
 
 Remember to always maintain the security of your API keys and any other sensitive data during the entire setup and deployment process.
 
-## Demo and Pictures
+## **Features and Demo**
 
-#### Twitter Profile: 
+### Feature 1: Twitter Profile
+- **Description**: Provide users with clean profile landing page, give a clear description of the bots purpose along with the bots tweet schedule. 
 
-<img alt="Twitter Profile" width=50% height=100% src="./data/media/Profile Demo.png">
+    - **Screenshot**: 
 
-#### Bi-Hourly Tweet Tweet: 
-<img alt="Bi-Hourly Tweet" width=50% height=100% src="./data/media/Bi-Hourly-Tweet Demo.png">
+        ![Feature 1 Screenshot](./data/media/Profile%20Demo.png)
 
-#### Sunset / Sunrise Tweet: 
-<img alt="Sunset / Sunrise Tweet" width=50% height=100% src="./data/media/Sunrise Sunset Demo.png">
+### Feature 2: Bi-Hourly Tweet Tweet
+- **Description**: Tweet the weather every other hour in the following format, keeping the tweets clear and concise. Along with a few emojis to make the tweet a little nicer to look at. 
 
-#### Weekly Forecast Tweet: 
-<img alt="Weekly Forecast Tweet" width=50% height=100% src="./data/media/Weekly Forecast Demo.png">
+    - **Screenshot**: 
 
+        ![Feature 2 Screenshot](./data/media/Bi-Hourly-Tweet%20Demo.png)
+
+### Feature 3: Sunset / Sunrise Tweet 
+- **Description**: Everyday at 6am the bot will tweet the sunrise and sunset times for that specific day. The tweet is well structured for easy readability and concise for clarity. 
+
+    - **Screenshot**: 
+
+        ![Feature 3 Screenshot](./data/media/Sunrise%20Sunset%20Demo.png)
+
+### Feature 4: Weekly Forecast Tweet
+- **Description**: Every Sunday at 12 PM PST the bot will tweet the 7-day forecast for the upcoming days. The tweet is formatted so that it distinguishes the type of weather that will occurr on specific days (cloudy, rainy, sunny, etc.).
+
+    - **Screenshot**: 
+
+        ![Feature 4 Screenshot](./data/media/Weekly%20Forecast%20Demo.png)
 
 ## 📄 License
 
