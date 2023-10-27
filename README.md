@@ -86,7 +86,7 @@ Remember to always maintain the security of your API keys and any other sensitiv
 <img alt="Sunset / Sunrise Tweet" width=50% height=100% src="./data/media/Sunrise Sunset Demo.png">
 
 #### Weekly Forecast Tweet: 
-<img alt="Weekly Forecast Tweet" width=50% height=100% src="./data/media/Weekly Forecast Demo.png"
+<img alt="Weekly Forecast Tweet" width=50% height=100% src="./data/media/Weekly Forecast Demo.png">
 
 
 ## 📄 License
