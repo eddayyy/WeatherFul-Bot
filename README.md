@@ -17,7 +17,7 @@
 
 ## Table of Contents
 1. [Overview](#overview)
-2. [Features](#🚀-features)
+2. [Features](#-features)
 3. [Setting up the Development Environment](#🔧-setting-up-the-development-environment)
 5. [Demo and Pictures](#demo)
 4. [License](#📄-license)
