@@ -45,7 +45,7 @@ Weatherful Bot is a Python-based automated system deployed on AWS Lambda, design
 Follow these steps to set up and deploy the Weatherful Bot:
 
 1. **Clone the Repository**: 
-   - Use the command `git clone https://github.com/eddayyy/WeatherFul-Bot` to get the codebase onto your local machine.
+   - Use the command `git clone https://github.com/eddayyy/WeatherFul-Bot` to clone the repository.
 
 2. **Install Requirements**:
    - Navigate to the project directory and run `pip install -r requirements.txt` to install necessary dependencies.
