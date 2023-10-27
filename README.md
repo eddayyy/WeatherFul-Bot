@@ -1,17 +1,45 @@
-# Weatherful Bot 🐦☀️
+<div align="center">
+    <img width=35% src="./data/media/Profile Picture.png">
+    <h1>Weatherful Bot 🐦☀️</h1>
+    <img alt="Python Version" src="https://img.shields.io/badge/Python-v3.10%2B-blue">
+    <img alt="AWS Lambda" src="https://img.shields.io/badge/AWS-Lambda-ff9900">
+    <img alt="AWS S3" src="https://img.shields.io/badge/AWS-S3-34cb39">
+    <img alt="AWS EventBridge" src="https://img.shields.io/badge/AWS-EventBridge-f00fe2">
+    <a href="https://opensource.org/licenses/MIT">
+        <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg">
+    </a>
+</div>
+
+## Table of Contents
+- [Overview](#-overview)
+- [Features](#-features)
+- [Setup and Deployment](#️-setup-and-deployment-or-development-environment)
+- [License](#-license)
+- [Features and Demo](#features-and-demo-link-to-any-demo-or-visual-guide)
 
 ## Overview
 
 Weatherful Bot is a Python-based automated system deployed on AWS Lambda, designed to tweet real-time weather updates for Fullerton, California,  bi-hourly. This repository hosts the code and documentation of Weatherful Bot, providing a convenient way for Twitter users in Fullerton to stay updated on the weather directly through their Twitter feed.
 
-## Features
+## 🚀 Features
 
-- **Location-Specific**: Tailored weather updates for Fullerton, California.
-- **Real-Time Weather Updates**: 
-    - Tweets the current weather bi-hourly.
-    - Tweets the sunrise and sunset every morning at 6 AM PST.
-    - Tweets a 7-Day forecast every Sunday at 12 PM PST.
-- **Automated Hashtags**: Utilizes hashtags like `#WeatherUpdate`, `#WeatherForecast`, and `#FullertonWeather` to categorize tweets.
+- **Manage Student Grades**: 
+    - **Modify Student Grades**: Swiftly adjust and update student grades.
+    - **Sort Grades**: Organize student grades for quick insights.
+    - **Search for Students**: Efficient student searches using Student ID (SID).
+
+- **Statistical Analysis**: 
+    - Generate insights on class performance for specific assignments, such as mean, median, standard deviation, missing assignments, and scores' range.
+
+- **Data Import/Export**: 
+    - **Import Students**: Import student data seamlessly from CSV files.
+    - **Export Modified Data**: Export updated student data conveniently to a CSV file.
+
+- **User-Friendly Interface**: 
+    - Designed for ease of use, ensuring educators can navigate and operate the application efficiently.
+
+- **Extended Features**: (or "Visual Demos", or another appropriate title)
+    - For a visual representation of features and demos, check [this link](https://github.com/eddayyy/RA-Assessment/tree/main).
 
 ## Tech Stack
 
@@ -21,7 +49,7 @@ Weatherful Bot is a Python-based automated system deployed on AWS Lambda, design
 - Weatherbit Forecast API 
 - Twitter Developer API Access
 
-## Deployment
+## 🛠️ Setting up the Development Environment
 
 Weatherful Bot is deployed on AWS Lambda, which allows it to run code in response to events without provisioning or managing servers. This serverless architecture is cost-effective and scales automatically by adjusting its capacity in response to incoming traffic.
 
