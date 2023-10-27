@@ -19,7 +19,7 @@
 1. [Overview](#overview)
 2. [Features](#-features)
 3. [Setting up the Development Environment](#-setting-up-the-development-environment)
-5. [Demo and Pictures](#demo)
+5. [Demo and Pictures](#demo-and-pictures)
 4. [License](#-license)
 
 ## Overview
@@ -73,7 +73,7 @@ Follow these steps to set up and deploy the Weatherful Bot:
 
 Remember to always maintain the security of your API keys and any other sensitive data during the entire setup and deployment process.
 
-## Demo 
+## Demo and Pictures
 
 #### Twitter Profile: 
 
