@@ -1,12 +1,12 @@
 <div align="center">
     <img width=35% src="./data/media/Profile Picture.png">
-    <h1>Weatherful Bot 🐦☀️</h1>
+    <h1>Weatherful Bot ☀️</h1>
     <img alt="Python Version" src="https://img.shields.io/badge/Python-v3.10%2B-blue">
     <img alt="AWS Lambda" src="https://img.shields.io/badge/AWS-Lambda-f4800b">
     <img alt="AWS S3" src="https://img.shields.io/badge/AWS-S3-43985a">
     <img alt="AWS EventBridge" src="https://img.shields.io/badge/AWS-EventBridge-ff00e7">
     <a href="https://opensource.org/licenses/MIT">
-        <img alt="License" src="https://img.shields.io/badge/License-GNU%20v3-blue.svg">
+        <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg">
     </a>
 </div>
 
