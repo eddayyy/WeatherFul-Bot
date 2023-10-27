@@ -54,9 +54,10 @@
     - **Screenshot**: 
 
         ![Feature 4 Screenshot](./data/media/Weekly%20Forecast%20Demo.png)
+
 ## 🛠️ Setting up the Development Environment
 
-Follow these steps to set up and deploy the Weatherful Bot:
+Follow these steps to set up your own instance of Weatherful Bot:
 
 1. **Clone the Repository**: 
    - Use the command `git clone https://github.com/eddayyy/WeatherFul-Bot` to clone the repository.
