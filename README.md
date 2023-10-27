@@ -23,33 +23,33 @@
 
 ## 🌟 Overview
 
-**[Weatherful Bot](https://twitter.com/WeatherfulBot)** is a Python-based automated system deployed on AWS Lambda designed to tweet real-time weather updates for Fullerton, California. Tweets are scheduled to occur bi-hourly with the current temperature, wind speeds, and humidity , daily at 6AM with sunrise and sunset times, and Sundays @ 12PM PST with the 7-day forecast. 
+**[Weatherful Bot](https://twitter.com/WeatherfulBot)** is a Python-based automated system deployed on AWS Lambda designed to tweet real-time weather updates for Fullerton, California. Tweets are scheduled to occur bi-hourly with the current temperature, wind speeds, and humidity, daily at 6AM with sunrise and sunset times, and Sundays @ 12PM PST with the 7-day forecast. 
 
 ## **Features and Demo**
 
 ### Feature 1: Twitter Profile
-- **Description**: Provide users with clean profile landing page, give a clear description of the bots purpose along with the bots tweet schedule. 
+- **Description**: The profile description aims to provide users with a clear description of the bot's purpose along with the bots tweet schedule. 
 
     - **Screenshot**: 
 
         ![Feature 1 Screenshot](./data/media/Profile%20Demo.png)
 
-### Feature 2: Bi-Hourly Tweet Tweet
-- **Description**: Tweet the weather every other hour in the following format, keeping the tweets clear and concise. Along with a few emojis to make the tweet a little nicer to look at. 
+### Feature 2: Bi-Hourly Tweet
+- **Description**: Tweet the weather every other hour in a clean format, along with emojis to make the tweets more visually appealing. 
 
     - **Screenshot**: 
 
         ![Feature 2 Screenshot](./data/media/Bi-Hourly-Tweet%20Demo.png)
 
 ### Feature 3: Sunset / Sunrise Tweet 
-- **Description**: Everyday at 6am the bot will tweet the sunrise and sunset times for that specific day. The tweet is well structured for easy readability and concise for clarity. 
+- **Description**: Every day at 6am the bot will tweet the sunrise and sunset times for that specific day. The tweet is well structured for easy readability and concise for clarity. 
 
     - **Screenshot**: 
 
         ![Feature 3 Screenshot](./data/media/Sunrise%20Sunset%20Demo.png)
 
 ### Feature 4: Weekly Forecast Tweet
-- **Description**: Every Sunday at 12 PM PST the bot will tweet the 7-day forecast for the upcoming days. The tweet is formatted so that it distinguishes the type of weather that will occurr on specific days (cloudy, rainy, sunny, etc.).
+- **Description**: Every Sunday at 12 PM PST the bot will tweet the 7-day forecast for the upcoming days. The tweet is formatted so that it distinguishes the type of weather that will occur on specific days (cloudy, rainy, sunny, etc.).
 
     - **Screenshot**: 
 
@@ -84,7 +84,7 @@ Follow these steps to set up your own instance of Weatherful Bot:
      - Set necessary environment variables, like the API keys and other configurations, within the Lambda function settings.
 
    - **Event Sources**:
-     - Set up scheduled events using Amazon EventBridge. This will trigger the Lambda function at the times you have scheduled
+     - Set up scheduled events using Amazon EventBridge. This will trigger the Lambda function at the times you've scheduled.
 
 Remember to always maintain the security of your API keys and any other sensitive data during the entire setup and deployment process.
 
