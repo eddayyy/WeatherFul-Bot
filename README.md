@@ -18,7 +18,7 @@
 ## Table of Contents
 1. [Overview](#-overview)
 2. [Features and Demo](#features-and-demo)
-3. [Setting up the Development Environment](#🛠️-setting-up-the-development-environment)
+3. [Setting up the Development Environment](#-setting-up-the-development-environment)
 4. [License](#-license)
 
 ## 🌟 Overview
