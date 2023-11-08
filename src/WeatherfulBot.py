@@ -35,7 +35,6 @@ class WeatherfulBot:
             raise
 
     def validate_tweet(self, tweet_text):
-
         return len(tweet_text) <= 280
 
     def tweet(self, type):

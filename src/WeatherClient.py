@@ -1,8 +1,9 @@
 import requests
 import json
 import pytz
-from datetime import datetime, timezone
 import logging
+
+from datetime import datetime, timezone
 
 
 class WeatherClient:
@@ -34,18 +35,10 @@ class WeatherClient:
 
         logging.basicConfig(level=logging.INFO)
 
-    def _make_request(self, url):
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            return json.loads(response.text)
-        except requests.RequestException as e:
-            logging.error(f"API Error: {e}")
-            return None
-
     def fetch_weather(self):
-        url = f"https://api.weatherbit.io/v2.0/current?&city={self.city}&key={self.weather_api}&units=I"
-        data = self._make_request(url)
+        url = f"https: //api.weatherbit.io/v2.0/current?&city={
+            self.city}&key={self.weather_api}&units=I"
+        data = requests.get(url)
 
         if not data:
             return self.failure_text
@@ -62,7 +55,8 @@ class WeatherClient:
             \n#Fullerton #CSUF #FullertonWeather"
 
     def fetch_sun_times(self):
-        url = f"https://api.weatherbit.io/v2.0/forecast/daily?&city={self.city}&key={self.weather_api}&units=I"
+        url = f"https: //api.weatherbit.io/v2.0/forecast/daily?&city={
+            self.city}&key={self.weather_api}&units=I"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -79,7 +73,8 @@ class WeatherClient:
                     sunset = datetime.fromtimestamp(first_day_data['sunset_ts'], tz=timezone.utc).astimezone(
                         tz).strftime('%I:%M %p').lstrip('0')
 
-                    tweet_text = f"Good Morning Fullerton!☀️\nThe sun will rise at {sunrise}🌅 and set at {sunset}🌇\n Have a great day!🌞"
+                    tweet_text = f"Good Morning Fullerton!☀️\nThe sun will rise at {
+                        sunrise}🌅 and set at {sunset}🌇\n Have a great day!🌞"
                     return tweet_text + '\n#CSUF #Fullerton  #FullertonWeather  #Sunrise #Sunset'
                 else:
                     return self.failure_text
@@ -91,13 +86,14 @@ class WeatherClient:
             return self.failure_text
 
     def fetch_weekly_forecast(self):
-        url = f"https://api.weatherbit.io/v2.0/forecast/daily?&city={self.city}&key={self.weather_api}&units=I&days=8"
+        url = f"https: //api.weatherbit.io/v2.0/forecast/daily?&city={
+            self.city}&key={self.weather_api}&units=I&days=8"
         response = requests.get(url)
 
         if response.status_code == 200:
             forecast_data = json.loads(response.text)
-            # print(forecast_data)
             tweet_text = "🛰️☁️ 7-day forecast for Fullerton:\n"
+
             # Dictionary to group days by their description
             grouped_days = {}
             for day in forecast_data['data'][1::]:
@@ -108,7 +104,7 @@ class WeatherClient:
                 max_temp = int(day['high_temp'])
                 min_temp = int(day['low_temp'])
                 description = day['weather']['description']
-                print(description)
+
                 if description in ('Shower rain', 'Rain', 'Mist'):
                     description = 'Rain'
                 elif description in ('Few clouds', 'Scattered clouds', 'Broken clouds'):
@@ -120,7 +116,6 @@ class WeatherClient:
                     f"📆{day_of_week} | {max_temp}/{min_temp}°F🌡️")
 
             # Append grouped days to the tweet_text
-            print(grouped_days.items())
             for desc, days_list in grouped_days.items():
                 comment = self.weekly_comments.get(desc, '')
                 tweet_text += f"\n{comment}"
@@ -128,6 +123,6 @@ class WeatherClient:
                     tweet_text += f"\n{day_info}"
             return tweet_text.strip()
         else:
-            error_message = f"Failed to fetch forecast. Error: {response.status_code}"
-            print(error_message)
+            error_message = f"Failed to fetch forecast. Error: {
+                response.status_code}"
             return error_message
