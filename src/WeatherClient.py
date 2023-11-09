@@ -36,58 +36,45 @@ class WeatherClient:
         logging.basicConfig(level=logging.INFO)
 
     def fetch_weather(self):
-        url = f"https: //api.weatherbit.io/v2.0/current?&city={
-            self.city}&key={self.weather_api}&units=I"
-        data = requests.get(url)
+        url = f"https://api.weatherbit.io/v2.0/current?&city={self.city}&key={self.weather_api}&units=I"
+        response = requests.get(url)
 
-        if not data:
+        if response.status_code == 200:
+            data = json.loads(response.text)
+            temp = data['data'][0]['temp']
+            description = data['data'][0]['weather']['description']
+            wind_speed = data['data'][0]['wind_spd']
+            humidity = data['data'][0]['rh']
+            uv_index = data['data'][0]['uv']
+            comment = self.weather_comments.get(description, "Enjoy the day!")
+
+            return f"Hey Fullerton, {comment}\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
+                \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
+                \n#Fullerton #CSUF #FullertonWeather"
+        else:
             return self.failure_text
 
-        temp = data['data'][0]['temp']
-        description = data['data'][0]['weather']['description']
-        wind_speed = data['data'][0]['wind_spd']
-        humidity = data['data'][0]['rh']
-        uv_index = data['data'][0]['uv']
-        comment = self.weather_comments.get(description, "Enjoy the day!")
-
-        return f"Hey Fullerton, {comment}\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
-            \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
-            \n#Fullerton #CSUF #FullertonWeather"
-
     def fetch_sun_times(self):
-        url = f"https: //api.weatherbit.io/v2.0/forecast/daily?&city={
-            self.city}&key={self.weather_api}&units=I"
+        url = f"https://api.weatherbit.io/v2.0/forecast/daily?&city={self.city}&key={self.weather_api}&units=I"
         response = requests.get(url)
 
         if response.status_code == 200:
             sun_data = json.loads(response.text)
+            first_day_data = sun_data['data'][0]
 
-            if 'data' in sun_data and sun_data['data']:
-                first_day_data = sun_data['data'][0]
+            tz = pytz.timezone('America/Los_Angeles')
+            sunrise = datetime.fromtimestamp(first_day_data['sunrise_ts'], tz=timezone.utc).astimezone(
+                tz).strftime('%I:%M %p').lstrip('0')
+            sunset = datetime.fromtimestamp(first_day_data['sunset_ts'], tz=timezone.utc).astimezone(
+                tz).strftime('%I:%M %p').lstrip('0')
 
-                if 'sunrise_ts' in first_day_data and 'sunset_ts' in first_day_data:
-
-                    tz = pytz.timezone('America/Los_Angeles')
-                    sunrise = datetime.fromtimestamp(first_day_data['sunrise_ts'], tz=timezone.utc).astimezone(
-                        tz).strftime('%I:%M %p').lstrip('0')
-                    sunset = datetime.fromtimestamp(first_day_data['sunset_ts'], tz=timezone.utc).astimezone(
-                        tz).strftime('%I:%M %p').lstrip('0')
-
-                    tweet_text = f"Good Morning Fullerton!☀️\nThe sun will rise at {
-                        sunrise}🌅 and set at {sunset}🌇\n Have a great day!🌞"
-                    return tweet_text + '\n#CSUF #Fullerton  #FullertonWeather  #Sunrise #Sunset'
-                else:
-                    return self.failure_text
-            else:
-
-                return response.status_code
+            tweet_text = f"Good Morning Fullerton!☀️\nThe sun will rise at {sunrise}🌅 and set at {sunset}🌇\n Have a great day!🌞"
+            return tweet_text + '\n#CSUF #Fullerton  #FullertonWeather  #Sunrise #Sunset'
         else:
-            print(response.status_code)
             return self.failure_text
 
     def fetch_weekly_forecast(self):
-        url = f"https: //api.weatherbit.io/v2.0/forecast/daily?&city={
-            self.city}&key={self.weather_api}&units=I&days=8"
+        url = f"https://api.weatherbit.io/v2.0/forecast/daily?&city={self.city}&key={self.weather_api}&units=I&days=8"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -123,6 +110,4 @@ class WeatherClient:
                     tweet_text += f"\n{day_info}"
             return tweet_text.strip()
         else:
-            error_message = f"Failed to fetch forecast. Error: {
-                response.status_code}"
-            return error_message
+            return self.failure_text
