@@ -48,6 +48,10 @@ class WeatherClient:
             humidity = data['data'][0]['rh']
             uv_index = data['data'][0]['uv']
             comment = self.weather_comments.get(description, "Enjoy the day!")
+            if comment == "Enjoy the day": 
+                return f"Hey Fullerton, we currently have {description}!\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
+                \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
+                \n#Fullerton #CSUF #FullertonWeather" s
 
             return f"Hey Fullerton, {comment}\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
                 \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
