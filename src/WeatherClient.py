@@ -18,6 +18,7 @@ class WeatherClient:
             "Broken clouds": "there are clouds everywhere, but it's cool! ⛅",
             "Shower rain": "uh oh! We've got rain, bring out those umbrellas! ☔",
             "Rain": "it's pouring rain! Stay cozy indoors. ☔🌧",
+            "Overcast Clouds" : "it's pouring rain! Stay cozy indoors. ☔🌧",
             "Thunderstorm": "we've got a thunderstorm! Stay safe indoors! ⛈",
             "Snow": "is that snow? We have a snow day! ☃️❄️",
             "Mist": "it's a little misty out! Stay safe. 🌫"
