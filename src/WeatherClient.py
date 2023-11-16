@@ -12,16 +12,51 @@ class WeatherClient:
         self.weather_api = weather_api
 
         self.weather_comments = {
+            # All possible descriptions to be returned by weatherbits API, these comments are meant to elevate tweets and make them more compelling.
             "Clear sky": "it's the perfect day to go out! 🌞",
             "Few clouds": "it's a bit cloudy at the moment! 🌤",
             "Scattered clouds": "the clouds are playing hide and seek! ☁️🌤",
             "Broken clouds": "there are clouds everywhere, but it's cool! ⛅",
             "Shower rain": "uh oh! We've got rain, bring out those umbrellas! ☔",
             "Rain": "it's pouring rain! Stay cozy indoors. ☔🌧",
-            "Overcast Clouds" : "it's pouring rain! Stay cozy indoors. ☔🌧",
+            "Drizzle": "it's drizzling! Stay cozy indoors. ☔🌧",
+            "Overcast Clouds": "it's pouring rain! Stay cozy indoors. ☔🌧",
             "Thunderstorm": "we've got a thunderstorm! Stay safe indoors! ⛈",
             "Snow": "is that snow? We have a snow day! ☃️❄️",
-            "Mist": "it's a little misty out! Stay safe. 🌫"
+            "Mist": "it's a little misty out! Stay safe. 🌫",
+            "Thunderstorm with light rain": "there's a light thunderstorm! Be cautious! ⛈🌦",
+            "Thunderstorm with rain": "there's a thunderstorm with rain, stay indoors! ⛈🌧",
+            "Thunderstorm with heavy rain": "there's a heavy thunderstorm alert! Stay safe! ⛈🌧",
+            "Thunderstorm with light drizzle": "we have a light drizzly thunderstorm! Stay dry! ⛈🌦",
+            "Thunderstorm with drizzle": "there's a drizzly thunderstorm outside! ⛈🌦",
+            "Thunderstorm with heavy drizzle": "there's currently a heavy drizzle and thunderstorm! ⛈🌦",
+            "Thunderstorm with Hail": "it's currently hailing along with a thunderstorm! Be very cautious! ⛈❄️",
+            "Light Drizzle": "there's a bit of drizzle out there! 🌦",
+            "Heavy Drizzle": "we should expect heavy drizzle! Stay dry! 🌦",
+            "Light Rain": "we've got light rain, might need an umbrella! ☔",
+            "Moderate Rain": "there's moderate rain outside, stay dry! ☔",
+            "Heavy Rain": "heavy rain alert! Stay indoors and dry! ☔🌧",
+            "Freezing rain": "beware of freezing rain! Stay warm! ☔❄️",
+            "Light shower rain": "light showers are expected, carry an umbrella! ☔",
+            "Heavy shower rain": "heavy showers ahead! Stay dry! ☔🌧",
+            "Light snow": "light snow flurries! Enjoy the snow! ☃️❄️",
+            "Snow": "snowfall alert! Stay warm and safe! ☃️❄️",
+            "Heavy Snow": "heavy snow expected! Bundle up! ☃️❄️",
+            "Mix snow/rain": "mixed snow and rain! Dress warmly! ☔❄️",
+            "Sleet": "sleet ahead, be cautious on roads! ❄️☔",
+            "Heavy sleet": "heavy sleet, watch your step! ❄️☔",
+            "Snow shower": "snow showers incoming! Enjoy the view! ☃️❄️",
+            "Heavy snow shower": "heavy snow showers! Stay warm! ☃️❄️",
+            "Flurries": "flurries in the air! Enjoy the snow! ☃️❄️",
+            "Mist": "misty conditions, drive safely! 🌫",
+            "Smoke": "smoky conditions, take care! 🌫",
+            "Haze": "hazy weather, be cautious! 🌫",
+            "Sand/dust": "sandy or dusty, protect your eyes! 🌫",
+            "Fog": "foggy weather, drive safely! 🌫",
+            "Freezing Fog": "freezing fog around, stay warm! 🌫❄️",
+            "Unknown Precipitation": "unknown precipitation, be prepared for anything! ☔❄️",
+            "Overcast clouds": "we've got overcast skies, it's getting gloomy! ☁️",
+            "Unknown Precipitation": "unpredictable weather ahead! Stay prepared! ☔❄️"
         }
 
         self.weekly_comments = {
@@ -46,12 +81,7 @@ class WeatherClient:
             description = data['data'][0]['weather']['description']
             wind_speed = data['data'][0]['wind_spd']
             humidity = data['data'][0]['rh']
-            uv_index = data['data'][0]['uv']
             comment = self.weather_comments.get(description, "Enjoy the day!")
-            if comment == "Enjoy the day": 
-                return f"Hey Fullerton, we currently have {description}!\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
-                \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
-                \n#Fullerton #CSUF #FullertonWeather" s
 
             return f"Hey Fullerton, {comment}\n🌡️It's currently {temp}°F! \n🌬️The current Wind Speeds are: {wind_speed} mph\
                 \n💧 We are at {humidity}% humidity\n🌞Stay comfy and safe! 😊\
